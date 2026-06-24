@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Setup Playbook — Nigeria Automotive Ventures</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --paper:#faf9f5;--card:#fffefb;--ink:#141413;--muted:#6f6d64;--faint:#b0aea5;--line:#e8e6dc;
+  --orange:#d97757;--orange-deep:#c4623f;--orange-soft:#f6e9e2;--blue:#6a9bcc;--green:#788c5d;
+  --shadow:0 1px 2px rgba(20,20,19,.03),0 10px 30px rgba(20,20,19,.05);--r:16px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Lora",Georgia,serif;color:var(--ink);background:var(--paper);line-height:1.6}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{margin:0;font-family:"Poppins",Arial,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+a{color:var(--orange-deep)}
+.head{background:var(--ink);color:var(--paper)}
+.head-in{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:26px 24px}
+.head h1{font-size:1.5rem;font-weight:700}
+.head .sub{margin-top:4px;font-size:.9rem;opacity:.8}
+.head a{color:var(--paper);font-size:.85rem;opacity:.85;text-decoration:none;font-family:"Poppins",sans-serif;font-weight:500}
+.note{margin-top:18px;font-size:.84rem;background:var(--orange-soft);border:1px solid #ecd6cb;border-left:3px solid var(--orange);border-radius:10px;padding:11px 15px}
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 8px}
+.pick button{font-family:"Poppins",sans-serif;font-weight:500;font-size:.84rem;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;transition:all .12s}
+.pick button:hover{border-color:var(--orange)}
+.pick button.on{background:var(--orange);color:#fff;border-color:var(--orange)}
+.totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0 6px}
+.tc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+.tc .k{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-family:"Poppins",sans-serif;font-weight:500}
+.tc .v{font-size:1.2rem;font-weight:600;font-family:"Poppins",sans-serif;margin-top:3px}
+.steps{margin:14px 0 40px;position:relative}
+.step{display:grid;grid-template-columns:38px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.badge{width:30px;height:30px;border-radius:50%;background:var(--orange);color:#fff;font-family:"Poppins",sans-serif;font-weight:600;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.step.uni .badge{background:var(--blue)}
+.st-t{font-family:"Poppins",sans-serif;font-weight:600;font-size:1.02rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{font-size:.66rem;text-transform:uppercase;letter-spacing:.04em;font-weight:600;padding:2px 8px;border-radius:999px;background:#eef1e7;color:#3b4a26}
+.tag.confirm{background:#fbe7d9;color:#8a4b1d}
+.st-d{font-size:.92rem;margin:5px 0}
+.who{font-size:.86rem;color:var(--muted);margin:4px 0}
+.who b{font-family:"Poppins",sans-serif;font-weight:600;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.chip{font-size:.76rem;font-family:"Poppins",sans-serif;font-weight:500;padding:4px 10px;border-radius:999px}
+.chip.cost{background:#e7eef6;color:#234a6b}
+.chip.time{background:var(--paper);border:1px solid var(--line);color:var(--muted)}
+.note2{font-size:.82rem;color:var(--muted);margin-top:7px;font-style:italic}
+footer{color:var(--faint);font-size:.78rem;padding:24px 24px 50px;border-top:1px solid var(--line);margin-top:10px}
+</style>
+</head>
+<body>
+<header class="head">
+  <div class="head-in">
+    <div><h1>Setup playbook</h1><div class="sub">Step by step — who to call, what it costs, how long · Nigeria · 2026</div></div>
+    <a href="plans.html">← back to ventures</a>
+  </div>
+</header>
+<div class="wrap">
+  <div class="note"><strong>Verified 2026 figures</strong> from CAC, LASAA, NADDC, SON, NEMSA &amp; Nigeria Customs. Steps tagged <span class="tag confirm">confirm</span> weren't fully verifiable online — phone the agency before you budget. Costs exclude agent/professional fees unless noted.</div>
+  <div class="pick" id="pick"></div>
+  <div class="totals" id="totals"></div>
+  <div class="steps" id="steps"></div>
+</div>
+<footer class="wrap">Backbone verified via deep research against CAC Schedule of Fees (2025), LASAA 2026 rate card, NADDC, SON (son.gov.ng), NEMSA fee schedule &amp; Nigeria Customs. Sector sourcing from NBS, Jiji &amp; Nigerian SME sources. Estimates — confirm live figures before committing capital.</footer>
+<script>
+const UNI = [
+  {t:"Register your company", d:"Reserve a name, then incorporate a private limited company (share capital ≤₦1m).", who:"<b>Corporate Affairs Commission</b> · pre.cac.gov.ng (or an accredited agent)", cost:"₦11,000 (~$7)", time:"3–7 days", note:"₦10k registration + ₦1k name reservation. Agents bundle ~₦40–50k incl. ₦7.5k FIRS stamp duty + their fee."},
+  {t:"Get your Tax ID (TIN)", d:"Your TIN is issued automatically on incorporation; activate it with FIRS to file tax.", who:"<b>FIRS</b> · firs.gov.ng (TaxProMax for filing)", cost:"Free", time:"with CAC", note:"Register for VAT once turnover crosses the small-company threshold (~₦25m — confirm current).", confirm:true},
+  {t:"Open a corporate bank account", d:"Take your CAC documents to any commercial bank.", who:"<b>GTBank · Access · Zenith · UBA · Moniepoint</b>", cost:"Free (opening deposit varies)", time:"1–3 days", note:"Bring: CAC certificate + status report, board resolution, directors' IDs + BVN, utility bill, two references.", confirm:true},
+  {t:"SCUML registration", d:"Required if you trade in vehicles or auto parts (a 'designated non-financial business').", who:"<b>EFCC SCUML</b> · scuml.efcc.gov.ng", cost:"Free", time:"1–2 weeks", note:"Needed for parts trading, dealership & the marketplace; skip for pure services.", confirm:true, only:"scuml"},
+  {t:"Premises & signage permit", d:"Register your signboard / premises with your Local Government.", who:"<b>Your LGA</b> · in Lagos, <b>LASAA</b> · lasaa.lg.gov.ng", cost:"₦4,960–₦101,900 / yr", time:"1–2 weeks", note:"Small wall sign ₦4,960 (rural) → ₦28,400 (high-street); freestanding forecourt sign up to ₦101,900 + ₦137k encroachment."},
+];
+const V = {
+  parts:{name:"Spare-parts trading", scuml:true, total:"~₦550k ($345)", renew:"signage + union dues", steps:[
+    {t:"Import certification (only if importing)", d:"For imported parts, get SONCAP pre-shipment certification, then a Form M before the goods ship.", who:"<b>SON</b> · son.gov.ng → National Single Window", cost:"per shipment + duty 5–20% + 7.5% VAT", time:"before shipping"},
+    {t:"Source your stock", d:"Buy fast-movers — pads, filters, bulbs, sensors, batteries, tyres.", who:"<b>Ladipo Market & ASPAMDA</b> (Lagos), Aba; or import China/Dubai", cost:"₦400k+ initial", time:"ongoing"},
+    {t:"Join the market union", d:"ASPAMDA / Ladipo membership to trade in the hub.", who:"Market association", cost:"varies", time:"~1 week", confirm:true},
+    {t:"Launch & sell", d:"List on Jiji (208k+ parts) and lock garage/mechanic supply contracts.", who:"Jiji · WhatsApp · local garages", cost:"—", time:"week 1"},
+  ]},
+  diagnostics:{name:"Mobile diagnostics", scuml:false, total:"~₦0.9–1.4m ($560–886)", renew:"—", steps:[
+    {t:"(No sector licence needed)", d:"Optional: a trade-test / NADDC-aligned certificate boosts trust.", who:"NABTEB / NADDC-approved trainers", cost:"varies", time:"optional"},
+    {t:"Buy your diagnostic kit", d:"Pro OBD-II scanner + hand tools + multimeter.", who:"<b>Jiji</b> (Autel/Launch) · ₦237k (MD806) to ₦750k (MK808S)", cost:"₦0.9–1.4m all-in", time:"~1 week"},
+    {t:"Launch & get clients", d:"Take WhatsApp/Jiji leads; sign fleet maintenance retainers.", who:"Bolt/Uber drivers · corporate fleets", cost:"—", time:"week 1"},
+  ]},
+  detailing:{name:"Car detailing", scuml:false, total:"~₦1m ($625)", renew:"signage", steps:[
+    {t:"(No sector licence needed)", d:"Just CAC + the LGA signage permit above.", who:"—", cost:"—", time:"—"},
+    {t:"Buy your detailing kit", d:"Pressure washer, vacuum, polisher/buffer, ceramic-coating consumables.", who:"Auto-care suppliers · Jiji", cost:"~₦1m", time:"~1 week"},
+    {t:"Launch", d:"Start mobile in affluent corridors (Lekki/VI/Ikoyi); upsell ceramic coating + monthly subscriptions.", who:"Instagram · estates · car parks", cost:"—", time:"week 1"},
+  ]},
+  accessories:{name:"Accessories (mini-import)", scuml:false, total:"~₦1.1m ($700)", renew:"—", steps:[
+    {t:"Mini-import (no import licence)", d:"Courier/mini-import needs no import licence; electronics attract Customs duty + 7.5% VAT.", who:"<b>Nigeria Customs</b> · china procurement agent", cost:"duty + VAT on landed value", time:"at clearing"},
+    {t:"Source your stock", d:"Buy 5–8 fast SKUs (dashcams, mats, LED, holders) from 1688 via an agent.", who:"<b>1688 / Alibaba</b> via a China-import agent", cost:"₦450k–800k", time:"2–3 wks (freight)"},
+    {t:"Launch", d:"List on Jiji/Jumia + Instagram; deliver via dispatch riders. Dropship to test before bulk.", who:"Jiji · Jumia · IG · GIG dispatch", cost:"—", time:"week 1"},
+  ]},
+  batteries:{name:"Batteries + GPS trackers", scuml:false, total:"~₦2.8m ($1,750)", renew:"NCC/MNO SIM fees", steps:[
+    {t:"SIM partnership (no telecoms licence)", d:"Get bulk M2M/IoT SIMs for the trackers via a mobile network — no NCC licence needed yourself.", who:"<b>MTN / Airtel</b> or an M2M aggregator", cost:"per-SIM", time:"~1 week"},
+    {t:"Import certification (if importing)", d:"SONCAP pre-shipment cert for imported trackers/batteries.", who:"<b>SON</b> · son.gov.ng", cost:"per shipment", time:"before shipping"},
+    {t:"Source your stock", d:"Batteries from local distributors (Solite/Rocket); GT06N trackers via Alibaba/Jimi-IoT; set up a tracking platform.", who:"Local battery distributors · Alibaba", cost:"~₦2m", time:"~2 weeks"},
+    {t:"Launch", d:"Offer free mobile install; bill annual auto-renew subscriptions; win a logistics/ride-hail fleet.", who:"Fleets · insurers · banks", cost:"—", time:"week 1"},
+  ]},
+  cng:{name:"CNG conversion centre", scuml:false, total:"~₦14.5m ($9,700)", renew:"NADDC revalidation", steps:[
+    {t:"NADDC CNG accreditation", d:"Apply online as a licensed CNG conversion workshop; pay the fee on the portal via Remita.", who:"<b>NADDC</b> · cng.naddc.gov.ng · 13 David Ejoor St, Abuja · ☎ +234 9 291 3781/3783 · contact@naddc.gov.ng", cost:"~₦250,000", time:"4–8 weeks", confirm:true},
+    {t:"NMDPRA permit (if dispensing gas)", d:"Auto-gas / CNG refuelling permit for fuel-dispensing operations.", who:"<b>NMDPRA</b> · ags.nmdpra.gov.ng", cost:"fee on application", time:"4–8 weeks", confirm:true},
+    {t:"Certify your technicians", d:"NADDC-approved CNG installer training (NABTEB occupational standards).", who:"NADDC-approved training centres", cost:"varies", time:"~4 weeks"},
+    {t:"Source kits & workshop tools", d:"Sequential-injection conversion kits + lift, leak detector, timing tools.", who:"Kit importers (Italy/India/China)", cost:"~₦6–7m", time:"~4 weeks"},
+    {t:"Launch", d:"Win transporter-union contracts — the subsidised conversion volume.", who:"NURTW · transport unions · fleets", cost:"—", time:"week 1"},
+  ]},
+  lubricant:{name:"Lubricant blending & brand", scuml:false, total:"~₦8m distributor / ₦38m plant", renew:"MANCAP + NMDPRA annual", steps:[
+    {t:"SON MANCAP (local product cert)", d:"Mandatory for locally made products. Get the form at your nearest SON State Office; submit CAC cert, an on-the-spot test report, and payment.", who:"<b>SON</b> · son.gov.ng/mancapservice · nearest State Office", cost:"~₦0.5–1.5m", time:"1–3 months"},
+    {t:"NMDPRA lubricant licence", d:"Blending/marketing licence; plus the 2025 base-oil import licence if you import inputs.", who:"<b>NMDPRA</b> · nmdpra.gov.ng", cost:"~₦0.5–3m", time:"weeks–months", confirm:true},
+    {t:"Source inputs", d:"Base oil (SN500 / Group II–III) via importers, additive packages, bottles & branding.", who:"Base-oil importers · additive suppliers", cost:"₦4–8m first run", time:"~4 weeks"},
+    {t:"Launch", d:"Distribute to mechanics, filling stations, retail; ECOWAS export once MANCAP-certified.", who:"Mechanics · filling stations · NEPC (export)", cost:"—", time:"ongoing"},
+  ]},
+  marketplace:{name:"Auto-parts marketplace", scuml:true, total:"~₦17–27m ($11–17k)", renew:"hosting + ops", steps:[
+    {t:"Integrate payments (no CBN licence)", d:"Use Paystack/Flutterwave split-payments — avoid the ₦100m PSSP licence by not holding customer funds.", who:"<b>Paystack / Flutterwave</b>", cost:"~1.5% per transaction", time:"~1 week"},
+    {t:"Build the MVP", d:"No-code marketplace (Sharetribe) + hosting; enter parts-first (higher take, counterfeit pain).", who:"Sharetribe · a contract dev", cost:"~₦6–9m", time:"4–8 weeks"},
+    {t:"Seed both sides", d:"Onboard verified sellers + retailers in ONE city corridor; 2 field reps.", who:"Mechanics · parts dealers · retailers", cost:"~₦8m (6 mo ops)", time:"ongoing"},
+    {t:"Launch & layer finance", d:"Verify sellers (the anti-counterfeit wedge); add BNPL on order data once liquid.", who:"Lenders · logistics partners", cost:"—", time:"months"},
+  ]},
+};
+const ORDER=["parts","diagnostics","detailing","accessories","batteries","cng","lubricant","marketplace"];
+const pick=document.getElementById("pick");
+pick.innerHTML=ORDER.map((k,i)=>`<button data-k="${k}" class="${i===0?'on':''}">${V[k].name}</button>`).join("");
+function chip(cls,txt){return txt&&txt!=="—"?`<span class="chip ${cls}">${txt}</span>`:""}
+function stepHtml(s,n,uni){
+  const tag=s.confirm?`<span class="tag confirm">confirm</span>`:(uni?`<span class="tag">every business</span>`:"");
+  return `<div class="step ${uni?'uni':''}"><div class="badge">${n}</div><div>
+    <div class="st-t">${s.t} ${tag}</div>
+    <div class="st-d">${s.d}</div>
+    ${s.who&&s.who!=="—"?`<div class="who">${s.who}</div>`:""}
+    <div class="chips">${chip("cost",s.cost)}${chip("time",s.time)}</div>
+    ${s.note?`<div class="note2">${s.note}</div>`:""}
+  </div></div>`;
+}
+function render(k){
+  const v=V[k];
+  const uni=UNI.filter(s=>!s.only||(s.only==="scuml"&&v.scuml));
+  const all=[...uni.map(s=>({s,uni:true})),...v.steps.map(s=>({s,uni:false}))];
+  document.getElementById("totals").innerHTML=
+    `<div class="tc"><div class="k">total to launch</div><div class="v">${v.total}</div></div>
+     <div class="tc"><div class="k">steps</div><div class="v">${all.length}</div></div>
+     <div class="tc"><div class="k">annual renewals</div><div class="v" style="font-size:.95rem">${v.renew}</div></div>`;
+  document.getElementById("steps").innerHTML=all.map((x,i)=>stepHtml(x.s,i+1,x.uni)).join("");
+}
+pick.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
+  pick.querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");render(b.dataset.k);});
+render("parts");
+</script>
+</body>
+</html>
